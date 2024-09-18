@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://chp63o2gmkjsi"]
+
+[ext_resource type="Texture2D" uid="uid://bxbh32qdanqky" path="res://Assets/Char_3.png" id="1_641ey"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_la5d0"]
+radius = 12.0
+height = 44.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_641ey")
+hframes = 18
+vframes = 16
+frame = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_la5d0")
+
+[node name="LimboHSM" type="LimboHSM" parent="."]
+
+[node name="Idle" type="BTState" parent="LimboHSM"]
+
+[node name="Run" type="BTState" parent="LimboHSM"]
+
+[node name="Air" type="BTState" parent="LimboHSM"]
+
+[node name="Attack" type="BTState" parent="LimboHSM"]
