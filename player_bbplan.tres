@@ -1,0 +1,13 @@
+[gd_resource type="BlackboardPlan" format=3 uid="uid://c4ltcexcow0y"]
+
+[resource]
+var/can_jump/name = &"can_jump"
+var/can_jump/type = 1
+var/can_jump/value = false
+var/can_jump/hint = 0
+var/can_jump/hint_string = ""
+var/speed/name = &"speed"
+var/speed/type = 3
+var/speed/value = 0.0
+var/speed/hint = 0
+var/speed/hint_string = ""

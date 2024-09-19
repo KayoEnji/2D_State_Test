@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbl4rki2jp0py"]
 
-[ext_resource type="PackedScene" uid="uid://chp63o2gmkjsi" path="res://Player.tscn" id="1_mm5gk"]
+[ext_resource type="PackedScene" uid="uid://b7p3ypuaraaq6" path="res://Player.tscn" id="1_mm5gk"]
 [ext_resource type="Texture2D" uid="uid://cmfgbpw3c1pa1" path="res://icon.svg" id="2_q72b6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01k66"]
@@ -12,8 +12,6 @@ size = Vector2(41.5, 367)
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_mm5gk")]
-position = Vector2(118, 561)
-scale = Vector2(1.32, 1.32)
 
 [node name="Floor" type="StaticBody2D" parent="."]
 

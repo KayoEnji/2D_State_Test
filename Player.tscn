@@ -1,28 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://chp63o2gmkjsi"]
+[gd_scene load_steps=17 format=3 uid="uid://b7p3ypuaraaq6"]
 
 [ext_resource type="Texture2D" uid="uid://bxbh32qdanqky" path="res://Assets/Char_3.png" id="1_641ey"]
+[ext_resource type="Script" path="res://player.gd" id="1_wjk8r"]
+[ext_resource type="BlackboardPlan" uid="uid://c4ltcexcow0y" path="res://player_bbplan.tres" id="3_0ib6f"]
+[ext_resource type="Script" path="res://idle.gd" id="3_ambe4"]
+[ext_resource type="Script" path="res://move.gd" id="4_dyssu"]
+[ext_resource type="Script" path="res://jump.gd" id="6_2f4h8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_la5d0"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d5gmb"]
 radius = 12.0
 height = 44.0
 
-[sub_resource type="Animation" id="Animation_pyiac"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
-}
-
-[sub_resource type="Animation" id="Animation_hin78"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_8ic7d"]
+resource_name = "b_dash"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -33,22 +23,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [19]
-}
-
-[sub_resource type="Animation" id="Animation_j01kd"]
-resource_name = "jump"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
+"values": [2]
 }
 
 [sub_resource type="Animation" id="Animation_qm3mv"]
@@ -66,8 +41,23 @@ tracks/0/keys = {
 "values": [20]
 }
 
-[sub_resource type="Animation" id="Animation_8ic7d"]
-resource_name = "b_dash"
+[sub_resource type="Animation" id="Animation_pyiac"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_j01kd"]
+resource_name = "jump"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -78,7 +68,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_3cde6"]
@@ -98,6 +88,21 @@ tracks/0/keys = {
 "values": [16]
 }
 
+[sub_resource type="Animation" id="Animation_hin78"]
+resource_name = "run"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [19]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkeod"]
 _data = {
 "b_dash": SubResource("Animation_8ic7d"),
@@ -108,17 +113,42 @@ _data = {
 "run": SubResource("Animation_hin78")
 }
 
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_t7bah"]
+var/can_jump/name = &"can_jump"
+var/can_jump/type = 1
+var/can_jump/value = false
+var/can_jump/hint = 0
+var/can_jump/hint_string = ""
+var/speed/name = &"speed"
+var/speed/type = 3
+var/speed/value = 0.0
+var/speed/hint = 0
+var/speed/hint_string = ""
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_gdv0g"]
+var/can_jump/name = &"can_jump"
+var/can_jump/type = 1
+var/can_jump/value = false
+var/can_jump/hint = 0
+var/can_jump/hint_string = ""
+var/speed/name = &"speed"
+var/speed/type = 3
+var/speed/value = 0.0
+var/speed/hint = 0
+var/speed/hint_string = ""
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_wjk8r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_641ey")
 hframes = 18
 vframes = 16
-frame = 14
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_la5d0")
+shape = SubResource("CapsuleShape2D_d5gmb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -126,9 +156,23 @@ libraries = {
 }
 
 [node name="LimboHSM" type="LimboHSM" parent="."]
+blackboard_plan = ExtResource("3_0ib6f")
 
-[node name="Idle" type="BTState" parent="LimboHSM"]
+[node name="Idle" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("animation_player")]
+blackboard_plan = ExtResource("3_0ib6f")
+script = ExtResource("3_ambe4")
+animation_player = NodePath("../../AnimationPlayer")
 
-[node name="Run" type="BTState" parent="LimboHSM"]
+[node name="Move" type="LimboState" parent="LimboHSM"]
+blackboard_plan = ExtResource("3_0ib6f")
+script = ExtResource("4_dyssu")
+
+[node name="Jump" type="LimboState" parent="LimboHSM"]
+blackboard_plan = ExtResource("3_0ib6f")
+script = ExtResource("6_2f4h8")
 
 [node name="Air" type="BTState" parent="LimboHSM"]
+blackboard_plan = SubResource("BlackboardPlan_t7bah")
+
+[node name="Run" type="BTState" parent="LimboHSM"]
+blackboard_plan = SubResource("BlackboardPlan_gdv0g")
